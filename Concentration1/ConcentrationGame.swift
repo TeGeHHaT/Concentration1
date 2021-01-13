@@ -9,9 +9,9 @@ import Foundation
 
 class ConcetrationGame {
     
-    var cards = [Card]()
+    private(set) var cards = [Card]()
     
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
@@ -51,7 +51,6 @@ class ConcetrationGame {
             let card = Card()
             cards.insert(card, at: Int(arc4random_uniform(UInt32(cards.count))))
             cards.insert(card, at: Int(arc4random_uniform(UInt32(cards.count))))
-            //cards += [card, card]
         }
     }
 }
