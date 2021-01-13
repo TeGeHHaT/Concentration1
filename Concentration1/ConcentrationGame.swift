@@ -11,7 +11,26 @@ class ConcetrationGame {
     
     var cards = [Card]()
     
-    var indexOfOneAndOnlyFaceUpCard: Int?
+    var indexOfOneAndOnlyFaceUpCard: Int? {
+        get {
+            var foundIndex: Int?
+            for index in cards.indices {
+                if cards[index].isFaseUp {
+                    if foundIndex == nil {
+                        foundIndex = index
+                    } else {
+                        return nil
+                    }
+                }
+            }
+            return foundIndex
+        }
+        set {
+            for index in cards.indices {
+                cards[index].isFaseUp = (index == newValue)
+            }
+        }
+    }
     
     func chooseCard(at index: Int) {
         if !cards[index].isMatched {
@@ -21,12 +40,7 @@ class ConcetrationGame {
                     cards[index].isMatched = true
                 }
                 cards[index].isFaseUp = true
-                indexOfOneAndOnlyFaceUpCard = nil
             } else {
-                for flipDown in cards.indices {
-                    cards[flipDown].isFaseUp = false
-                }
-                cards[index].isFaseUp = true
                 indexOfOneAndOnlyFaceUpCard = index
             }
         }
